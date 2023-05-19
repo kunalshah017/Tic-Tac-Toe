@@ -50,7 +50,6 @@ Follow the on-screen instructions to play the game. Players can take turns and e
 If you want to customize the game further, you can explore the source code files:
 
 - `main.cpp`: Contains the main entry point and user interface logic.
-- `Game.cpp`: Implements the Tic Tac Toe game logic and board management.
 
 Feel free to modify and enhance the code as per your requirements.
 
