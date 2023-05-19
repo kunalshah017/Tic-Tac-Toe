@@ -1,0 +1,16 @@
+name: Greetings
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Thank You for showing your interest in this repo! We will surely look into your suggestion you can also get the issue assigned to yourself 😊"
+        pr-message: "Thank you for giving your time to this repo, will surely look into your changes and if it matches the conditions to contribute we will be more than happy to merge it"
