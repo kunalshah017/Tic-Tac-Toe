@@ -16,12 +16,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up C++ environment
-      uses: actions/setup-cpp@v2
-      with:
-        cpp-version: '17'  
-
     - name: Build and test
       run: |
         g++ -o my_program main.cpp
-        ./my_program                 
+        echo "q" | ./my_program                 
