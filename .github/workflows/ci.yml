@@ -14,4 +14,4 @@ jobs:
     - name: Build and test with GCC
       run: |
         g++ -o my_program main.cpp
-        echo "3" | ./my_program  
+        ./my_program  
