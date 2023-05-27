@@ -126,73 +126,17 @@ public:
 
     void WinCheck()
     {
-        if (chars[1] == 'X' && chars[2] == 'X' && chars[3] == 'X')
+        for (int i=1; i<=3; i++)    // If wins vertically or horizontally
         {
-            PlayerWin();
+            if (equals3(chars[i], chars[i+3], chars[i+6]) || equals3(chars[3*i-2], chars[3*i-1], chars[3*i]))
+            {
+                chars[i] == 'X' ? PlayerWin() : PlayerLose();
+                return;
+            }
         }
-        else if (chars[4] == 'X' && chars[5] == 'X' && chars[6] == 'X')
+        if (equals3(chars[1], chars[5], chars[9]) || equals3(chars[3], chars[5], chars[7]))    // If wins diagonally
         {
-            PlayerWin();
-        }
-        else if (chars[7] == 'X' && chars[8] == 'X' && chars[9] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[1] == 'X' && chars[4] == 'X' && chars[7] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[2] == 'X' && chars[5] == 'X' && chars[8] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[3] == 'X' && chars[6] == 'X' && chars[9] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[1] == 'X' && chars[5] == 'X' && chars[9] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[3] == 'X' && chars[5] == 'X' && chars[7] == 'X')
-        {
-            PlayerWin();
-        }
-        else if (chars[1] == 'O' && chars[2] == 'O' && chars[3] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[4] == 'O' && chars[5] == 'O' && chars[6] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[7] == 'O' && chars[8] == 'O' && chars[9] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[1] == 'O' && chars[4] == 'O' && chars[7] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[2] == 'O' && chars[5] == 'O' && chars[8] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[3] == 'O' && chars[6] == 'O' && chars[9] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[1] == 'O' && chars[5] == 'O' && chars[9] == 'O')
-        {
-            PlayerLose();
-        }
-        else if (chars[3] == 'O' && chars[5] == 'O' && chars[7] == 'O')
-        {
-            PlayerLose();
-        }
-        else
-        {
-            win = false;
+            chars[5] == 'X' ? PlayerWin() : PlayerLose();
         }
     }
 
@@ -208,6 +152,11 @@ public:
         cout << texts.lose;
         Pause();
         win = false;
+    }
+
+    bool equals3(char a, char b, char c)
+    {
+        return ((a == b) && (b == c));
     }
 };
 
