@@ -34,7 +34,7 @@ public:
     string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
     string win = "You Win!\n";                  // win message
     string lose = "You Lose!\n";                // lose message
-    string title = "\n\n----- Tie Game! -----\n";
+    string tie = "\n\n----- Tie Game! -----\n"; // tie message
     string thanks = "Thanks for playing!\n";
 };
 
@@ -190,7 +190,7 @@ int main()
             {
                 ClearScreen();
                 game.PrintBoard();
-                cout << texts.title;
+                cout << texts.tie;
                 break;
             }
         }
