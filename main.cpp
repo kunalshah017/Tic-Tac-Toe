@@ -26,145 +26,72 @@ void Pause()
 #endif
 }
 
+class Texts
+{
+public:
+    string horizontalLine = "---+---+---\n";    // horizontal line in the board
+    string invalidMove = "Invalid Move\n";      // invalid move
+    string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+    string win = "You Win!\n";                  // win message
+    string lose = "You Lose!\n";                // lose message
+    string title = "\n\n----- Tie Game! -----\n";
+    string thanks = "Thanks for playing!\n";
+};
+
 class Game
 {
 public:
-    char char1 = '1', char2 = '2', char3 = '3', char4 = '4', char5 = '5', char6 = '6', char7 = '7', char8 = '8', char9 = '9';
+    char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     char u;
     int comp;
     bool win = false;
+    Texts texts;
 
     void PrintBoard()
     {
-        cout << " " << char1 << " | " << char2 << " | " << char3 << " \n";
-        cout << "---+---+---\n";
-        cout << " " << char4 << " | " << char5 << " | " << char6 << " \n";
-        cout << "---+---+---\n";
-        cout << " " << char7 << " | " << char8 << " | " << char9 << " \n";
+        for (int i = 1; i <= 10; i++)
+        {
+            cout << " " << chars[i] << " ";
+            if (i % 3 == 0)
+            {
+                cout << endl << texts.horizontalLine;
+            }
+            else
+            {
+                cout << "|";
+            }
+        }
     }
 
     void getUserMove()
     {
-        cout << "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+        cout << texts.instruction;
         cout << ">>";
         cin >> u;
         cin.ignore();
 
-        if (u == '1')
+        
+        if (u >= '1' && u <= '9')
         {
-            if (char1 == '1')
+            int i = u - '0';
+            if (chars[i] == u)
             {
-                char1 = 'X';
+                chars[i] = 'X';
             }
             else
             {
-                cout << "Invalid Move\n";
+                cout << texts.invalidMove;
                 Pause();
             }
         }
-        else if (u == '2')
-        {
-            if (char2 == '2')
-            {
-                char2 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '3')
-        {
-            if (char3 == '3')
-            {
-                char3 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '4')
-        {
-            if (char4 == '4')
-            {
-                char4 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '5')
-        {
-            if (char5 == '5')
-            {
-                char5 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '6')
-        {
-            if (char6 == '6')
-            {
-                char6 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '7')
-        {
-            if (char7 == '7')
-            {
-                char7 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '8')
-        {
-            if (char8 == '8')
-            {
-                char8 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
-        else if (u == '9')
-        {
-            if (char9 == '9')
-            {
-                char9 = 'X';
-            }
-            else
-            {
-                cout << "Invalid Move\n";
-                Pause();
-            }
-        }
+
         else if (u == 'q')
         {
             cout << "Quitting...\n";
         }
         else
         {
-            cout << "Invalid Move\n";
+            cout << texts.invalidMove;
             Pause();
         }
     }
@@ -180,99 +107,11 @@ public:
     void ComputerMove()
     {
         ChooseRandom();
-        if (comp == 1)
+        if (comp >= 1 && comp <= 9)
         {
-            if (char1 == '1')
+            if (chars[comp] == '0' + comp)
             {
-                char1 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 2)
-        {
-            if (char2 == '2')
-            {
-                char2 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 3)
-        {
-            if (char3 == '3')
-            {
-                char3 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 4)
-        {
-            if (char4 == '4')
-            {
-                char4 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 5)
-        {
-            if (char5 == '5')
-            {
-                char5 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 6)
-        {
-            if (char6 == '6')
-            {
-                char6 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 7)
-        {
-            if (char7 == '7')
-            {
-                char7 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 8)
-        {
-            if (char8 == '8')
-            {
-                char8 = 'O';
-            }
-            else
-            {
-                ComputerMove();
-            }
-        }
-        else if (comp == 9)
-        {
-            if (char9 == '9')
-            {
-                char9 = 'O';
+                chars[comp] = 'O';
             }
             else
             {
@@ -287,106 +126,88 @@ public:
 
     void WinCheck()
     {
-        if (char1 == 'X' && char2 == 'X' && char3 == 'X')
+        if (chars[1] == 'X' && chars[2] == 'X' && chars[3] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char4 == 'X' && char5 == 'X' && char6 == 'X')
+        else if (chars[4] == 'X' && chars[5] == 'X' && chars[6] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char7 == 'X' && char8 == 'X' && char9 == 'X')
+        else if (chars[7] == 'X' && chars[8] == 'X' && chars[9] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char1 == 'X' && char4 == 'X' && char7 == 'X')
+        else if (chars[1] == 'X' && chars[4] == 'X' && chars[7] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char2 == 'X' && char5 == 'X' && char8 == 'X')
+        else if (chars[2] == 'X' && chars[5] == 'X' && chars[8] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char3 == 'X' && char6 == 'X' && char9 == 'X')
+        else if (chars[3] == 'X' && chars[6] == 'X' && chars[9] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char1 == 'X' && char5 == 'X' && char9 == 'X')
+        else if (chars[1] == 'X' && chars[5] == 'X' && chars[9] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char3 == 'X' && char5 == 'X' && char7 == 'X')
+        else if (chars[3] == 'X' && chars[5] == 'X' && chars[7] == 'X')
         {
-            cout << "You Win!\n";
-            Pause();
-            win = true;
+            PlayerWin();
         }
-        else if (char1 == 'O' && char2 == 'O' && char3 == 'O')
+        else if (chars[1] == 'O' && chars[2] == 'O' && chars[3] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char4 == 'O' && char5 == 'O' && char6 == 'O')
+        else if (chars[4] == 'O' && chars[5] == 'O' && chars[6] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char7 == 'O' && char8 == 'O' && char9 == 'O')
+        else if (chars[7] == 'O' && chars[8] == 'O' && chars[9] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char1 == 'O' && char4 == 'O' && char7 == 'O')
+        else if (chars[1] == 'O' && chars[4] == 'O' && chars[7] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char2 == 'O' && char5 == 'O' && char8 == 'O')
+        else if (chars[2] == 'O' && chars[5] == 'O' && chars[8] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char3 == 'O' && char6 == 'O' && char9 == 'O')
+        else if (chars[3] == 'O' && chars[6] == 'O' && chars[9] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char1 == 'O' && char5 == 'O' && char9 == 'O')
+        else if (chars[1] == 'O' && chars[5] == 'O' && chars[9] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
-        else if (char3 == 'O' && char5 == 'O' && char7 == 'O')
+        else if (chars[3] == 'O' && chars[5] == 'O' && chars[7] == 'O')
         {
-            cout << "You Lose!\n";
-            Pause();
-            win = true;
+            PlayerLose();
         }
         else
         {
             win = false;
         }
+    }
+
+    void PlayerWin()
+    {
+        cout << texts.win;
+        Pause();
+        win = true;
+    }
+
+    void PlayerLose()
+    {
+        cout << texts.lose;
+        Pause();
+        win = false;
     }
 };
 
@@ -404,18 +225,27 @@ int main()
     ClearScreen();
 
     Game game;
+    Texts texts;
 
     game.PrintBoard();
     do
     {
         game.getUserMove();
-        if (game.char1 != '1' && game.char2 != '2' && game.char3 != '3' && game.char4 != '4' && game.char5 != '5' && game.char6 != '6' && game.char7 != '7' && game.char8 != '8' && game.char9 != '9')
+        for (int i = 1; i <= 9; i++)
         {
-            ClearScreen();
-            game.PrintBoard();
-            cout << "\n\n----- Tie Game! -----\n";
-            break;
+            if (game.chars[i] == i)
+            {
+                break;
+            }
+            else if (i == 9)
+            {
+                ClearScreen();
+                game.PrintBoard();
+                cout << texts.title;
+                break;
+            }
         }
+
         game.ComputerMove();
         ClearScreen();
         game.PrintBoard();
@@ -426,7 +256,7 @@ int main()
         }
     } while (game.u != 'q');
 
-    cout << "Thanks for playing!\n";
+    cout << texts.thanks;
 
     return 0;
 }
