@@ -41,7 +41,7 @@ public:
 class Game
 {
 public:
-    char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};    // chars[0] is not used
     char u;
     int comp;
     bool win = false;
@@ -73,7 +73,7 @@ public:
         
         if (u >= '1' && u <= '9')
         {
-            int i = u - '0';
+            int i = u - '0';    // char -> int  e.g. '5' - '0' = 5
             if (chars[i] == u)
             {
                 chars[i] = 'X';
@@ -109,7 +109,7 @@ public:
         ChooseRandom();
         if (comp >= 1 && comp <= 9)
         {
-            if (chars[comp] == '0' + comp)
+            if (chars[comp] == '0' + comp)  // int -> char  e.g. '0' + 5 = '5'
             {
                 chars[comp] = 'O';
             }
@@ -128,9 +128,9 @@ public:
     {
         for (int i=1; i<=3; i++)    // If wins vertically or horizontally
         {
-            if (equals3(chars[i], chars[i+3], chars[i+6]) || equals3(chars[3*i-2], chars[3*i-1], chars[3*i]))
+            if (equals3(chars[i], chars[i+3], chars[i+6]) || equals3(chars[3*i-2], chars[3*i-1], chars[3*i]))   // first find if there's a winner
             {
-                chars[i] == 'X' ? PlayerWin() : PlayerLose();
+                chars[i] == 'X' ? PlayerWin() : PlayerLose();   // then check if X or O wins
                 return;
             }
         }
