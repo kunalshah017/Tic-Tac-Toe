@@ -1,0 +1,22 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and test
+      run: |
+        g++ -o my_program main.cpp
+        echo "q" | ./my_program                 
