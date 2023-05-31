@@ -29,13 +29,13 @@ void Pause()
 class Texts
 {
 public:
-    string horizontalLine = "---+---+---\n";    // horizontal line in the board
-    string invalidMove = "Invalid Move\n";      // invalid move
-    string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
-    string win = "You Win!\n";                  // win message
-    string lose = "You Lose!\n";                // lose message
-    string tie = "\n\n----- Tie Game! -----\n"; // tie message
-    string thanks = "Thanks for playing!\n";
+    const string horizontalLine = "---+---+---\n";    // horizontal line in the board
+    const string invalidMove = "Invalid Move\n";      // invalid move
+    const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+    const string win = "You Win!\n";                  // win message
+    const string lose = "You Lose!\n";                // lose message
+    const string tie = "\n\n----- Tie Game! -----\n"; // tie message
+    const string thanks = "Thanks for playing!\n";
 };
 
 class Game
