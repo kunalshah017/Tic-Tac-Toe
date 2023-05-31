@@ -11,6 +11,11 @@ This is a console-based implementation of the popular Tic Tac Toe game, written 
 - Error handling for invalid moves
 - Intelligent computer player (optional)
 
+## Contributors
+
+[![Contributors](https://contrib.rocks/image?repo=kunalshah017/tic-tac-toe)](https://github.com/kunalshah017/tic-tac-toe/graphs/contributors)
+#### people who made this possible ❤
+
 ## Getting Started
 
 ### Prerequisites
