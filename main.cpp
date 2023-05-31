@@ -6,6 +6,7 @@
 #include <cstring>
 #include <ctime>
 #include <random>
+#include "findMove.cpp"
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
@@ -106,7 +107,7 @@ public:
 
     void ComputerMove()
     {
-        ChooseRandom();
+        comp = findBestMove(chars);
         if (comp >= 1 && comp <= 9)
         {
             if (chars[comp] == '0' + comp)  // int -> char  e.g. '0' + 5 = '5'
