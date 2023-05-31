@@ -1,5 +1,4 @@
-// C++ program to find the next optimal move for
-// a player
+// Ref: https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
 #include<bits/stdc++.h>
 using namespace std;
 
