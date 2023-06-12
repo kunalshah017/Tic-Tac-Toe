@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
+#include <random>
 #include "findMove.cpp"
 #ifdef _WIN32
 #include <windows.h>
@@ -121,6 +122,14 @@ public:
             cout << texts.invalidMove;
             Pause();
         }
+    }
+
+    void ChooseRandom()
+    {
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> distribution(1, 9);
+        comp = distribution(gen);
     }
 
     void ComputerMove()
