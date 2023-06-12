@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
+#include <random>
 #include "findMove.cpp"
 #ifdef _WIN32
 #include <windows.h>
@@ -31,7 +32,9 @@ class Texts
 public:
     const string horizontalLine = "---+---+---\n";    // horizontal line in the board
     const string invalidMove = "Invalid Move\n";      // invalid move
+    const string invalidInput = "Invalid Input\n";    // invalid input
     const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+    const string difficultyMenu = "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard\n";
     const string win = "You Win!\n";                  // win message
     const string lose = "You Lose!\n";                // lose message
     const string tie = "\n\n----- Tie Game! -----\n"; // tie message
@@ -44,8 +47,32 @@ public:
     char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}; // chars[0] is not used
     char u;
     int comp;
+    float randomPos;    // for random move
     bool win = false;
     Texts texts;
+
+    void ShowDifficultyMenu()
+    {
+        char difficulty;
+        cout << texts.difficultyMenu;
+        cin >> difficulty;
+        switch (difficulty)
+        {
+        case '1':
+            randomPos = 7;
+            break;
+        case '2':
+            randomPos = 4;
+            break;
+        case '3':
+            randomPos = 1;
+            break;
+        default:
+            cout << texts.invalidInput;
+            ShowDifficultyMenu();
+            break;
+        }
+    }
 
     void PrintBoard()
     {
@@ -99,24 +126,28 @@ public:
         }
     }
 
-    void ComputerMove()
+    int GetRandomInt(int min, int max)
     {
-        comp = findBestMove(chars);
-        if (comp >= 1 && comp <= 9)
-        {
-            if (chars[comp] == '0' + comp) // int -> char  e.g. '0' + 5 = '5'
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> distribution(min, max);
+        return distribution(gen);
+    }
+
+    void ComputerMove()
+    {   
+        int randomNum = GetRandomInt(1, 10);
+        do {
+            if (randomNum <= randomPos) 
             {
-                chars[comp] = 'O';
+                comp = GetRandomInt(1, 9);
             }
             else
             {
-                ComputerMove();
+                comp = findBestMove(chars);
             }
-        }
-        else
-        {
-            ComputerMove();
-        }
+        } while (chars[comp] != '0' + comp);    // int -> char  e.g. '0' + 5 = '5'
+        chars[comp] = 'O';
     }
 
     void WinCheck()
@@ -170,6 +201,9 @@ int main()
 
     Game game;
     Texts texts;
+
+    game.ShowDifficultyMenu();
+    ClearScreen();
 
     game.PrintBoard();
     do
