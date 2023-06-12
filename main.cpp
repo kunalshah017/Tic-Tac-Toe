@@ -44,8 +44,35 @@ public:
     char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};    // chars[0] is not used
     char u;
     int comp;
+    float randomPos;    // for random move
     bool win = false;
     Texts texts;
+
+    void ShowDifficultyMenu()
+    {
+        char difficulty;
+        cout << "Choose difficulty:\n";
+        cout << "1. Easy\n";
+        cout << "2. Medium\n";
+        cout << "3. Hard\n";
+        cin >> difficulty;
+        switch (difficulty)
+        {
+        case '1':
+            randomPos = 0.7;
+            break;
+        case '2':
+            randomPos = 0.4;
+            break;
+        case '3':
+            randomPos = 0.1;
+            break;
+        default:
+            cout << "Invalid input\n";
+            ShowDifficultyMenu();
+            break;
+        }
+    }
 
     void PrintBoard()
     {
@@ -167,6 +194,9 @@ int main()
 
     Game game;
     Texts texts;
+
+    game.ShowDifficultyMenu();
+    ClearScreen();
 
     game.PrintBoard();
     do
