@@ -1,4 +1,4 @@
-//TIC-TAC-TOE
+// TIC-TAC-TOE
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -44,7 +44,7 @@ public:
 class Game
 {
 public:
-    char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};    // chars[0] is not used
+    char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}; // chars[0] is not used
     char u;
     int comp;
     float randomPos;    // for random move
@@ -76,16 +76,20 @@ public:
 
     void PrintBoard()
     {
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= 9; i++)
         {
             cout << " " << chars[i] << " ";
-            if (i % 3 == 0)
+            if (i % 3 == 0 && i != 9)
             {
-                cout << endl << texts.horizontalLine;
+                cout << endl
+                     << texts.horizontalLine;
             }
             else
             {
-                cout << "|";
+                if (i != 9)
+                {
+                    cout << "|";
+                }
             }
         }
     }
@@ -97,10 +101,9 @@ public:
         cin >> u;
         cin.ignore();
 
-        
         if (u >= '1' && u <= '9')
         {
-            int i = u - '0';    // char -> int  e.g. '5' - '0' = 5
+            int i = u - '0'; // char -> int  e.g. '5' - '0' = 5
             if (chars[i] == u)
             {
                 chars[i] = 'X';
@@ -149,15 +152,15 @@ public:
 
     void WinCheck()
     {
-        for (int i=1; i<=3; i++)    // If wins vertically or horizontally
+        for (int i = 1; i <= 3; i++) // If wins vertically or horizontally
         {
-            if (equals3(chars[i], chars[i+3], chars[i+6]) || equals3(chars[3*i-2], chars[3*i-1], chars[3*i]))   // first find if there's a winner
+            if (equals3(chars[i], chars[i + 3], chars[i + 6]) || equals3(chars[3 * i - 2], chars[3 * i - 1], chars[3 * i])) // first find if there's a winner
             {
-                chars[i] == 'X' ? PlayerWin() : PlayerLose();   // then check if X or O wins
+                chars[i] == 'X' ? PlayerWin() : PlayerLose(); // then check if X or O wins
                 return;
             }
         }
-        if (equals3(chars[1], chars[5], chars[9]) || equals3(chars[3], chars[5], chars[7]))    // If wins diagonally
+        if (equals3(chars[1], chars[5], chars[9]) || equals3(chars[3], chars[5], chars[7])) // If wins diagonally
         {
             chars[5] == 'X' ? PlayerWin() : PlayerLose();
         }
