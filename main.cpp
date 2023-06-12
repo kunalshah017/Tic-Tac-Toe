@@ -60,13 +60,13 @@ public:
         switch (difficulty)
         {
         case '1':
-            randomPos = 0.7;
+            randomPos = 7;
             break;
         case '2':
-            randomPos = 0.4;
+            randomPos = 4;
             break;
         case '3':
-            randomPos = 0.1;
+            randomPos = 1;
             break;
         default:
             cout << "Invalid input\n";
@@ -124,32 +124,28 @@ public:
         }
     }
 
-    void ChooseRandom()
+    int GetRandomInt(int min, int max)
     {
         static std::random_device rd;
         static std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> distribution(1, 9);
-        comp = distribution(gen);
+        std::uniform_int_distribution<int> distribution(min, max);
+        return distribution(gen);
     }
 
     void ComputerMove()
-    {
-        comp = findBestMove(chars);
-        if (comp >= 1 && comp <= 9)
-        {
-            if (chars[comp] == '0' + comp)  // int -> char  e.g. '0' + 5 = '5'
+    {   
+        int randomNum = GetRandomInt(1, 10);
+        do {
+            if (randomNum <= randomPos) 
             {
-                chars[comp] = 'O';
+                comp = GetRandomInt(1, 9);
             }
             else
             {
-                ComputerMove();
+                comp = findBestMove(chars);
             }
-        }
-        else
-        {
-            ComputerMove();
-        }
+        } while (chars[comp] != '0' + comp);    // int -> char  e.g. '0' + 5 = '5'
+        chars[comp] = 'O';
     }
 
     void WinCheck()
