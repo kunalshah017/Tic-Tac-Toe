@@ -67,6 +67,11 @@ public:
         case '3':
             randomPos = 1;
             break;
+        case 'q':
+            cout << "Quitting...\n";
+            exit(0);
+            break;
+            
         default:
             cout << texts.invalidInput;
             ShowDifficultyMenu();
