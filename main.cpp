@@ -32,7 +32,9 @@ class Texts
 public:
     const string horizontalLine = "---+---+---\n";    // horizontal line in the board
     const string invalidMove = "Invalid Move\n";      // invalid move
+    const string invalidInput = "Invalid Input\n";    // invalid input
     const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+    const string difficultyMenu = "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard\n";
     const string win = "You Win!\n";                  // win message
     const string lose = "You Lose!\n";                // lose message
     const string tie = "\n\n----- Tie Game! -----\n"; // tie message
@@ -52,10 +54,7 @@ public:
     void ShowDifficultyMenu()
     {
         char difficulty;
-        cout << "Choose difficulty:\n";
-        cout << "1. Easy\n";
-        cout << "2. Medium\n";
-        cout << "3. Hard\n";
+        cout << texts.difficultyMenu;
         cin >> difficulty;
         switch (difficulty)
         {
@@ -69,7 +68,7 @@ public:
             randomPos = 1;
             break;
         default:
-            cout << "Invalid input\n";
+            cout << texts.invalidInput;
             ShowDifficultyMenu();
             break;
         }
