@@ -183,6 +183,7 @@ public:
         cout << texts.lose;
         Pause();
         win = false;
+        exit(0);
     }
 
     bool equals3(char a, char b, char c)
@@ -216,7 +217,7 @@ int main()
         game.getUserMove();
         for (int i = 1; i <= 9; i++)
         {
-            if (game.chars[i] == i)
+            if (game.chars[i] == '0' + i)
             {
                 break;
             }
@@ -225,6 +226,7 @@ int main()
                 ClearScreen();
                 game.PrintBoard();
                 cout << texts.tie;
+                exit(0);
                 break;
             }
         }
