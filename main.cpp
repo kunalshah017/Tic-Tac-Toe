@@ -102,33 +102,39 @@ public:
     void getUserMove()
     {
         cout << texts.instruction;
-        cout << ">>";
-        cin >> u;
-        cin.ignore();
-
-        if (u >= '1' && u <= '9')
+        bool validInput = false;
+        do
         {
-            int i = u - '0'; // char -> int  e.g. '5' - '0' = 5
-            if (chars[i] == u)
+            cout << ">>";
+            cin >> u;
+            cin.ignore();
+
+            if (u >= '1' && u <= '9')
             {
-                chars[i] = 'X';
+                int i = u - '0'; // char -> int  e.g. '5' - '0' = 5
+                if (chars[i] == u)
+                {
+                    chars[i] = 'X';
+                    validInput = true;
+                }
+                else
+                {
+                    cout << texts.invalidMove;
+                    Pause();
+                }
+            }
+
+            else if (u == 'q')
+            {
+                cout << "Quitting...\n";
+                validInput = true;
             }
             else
             {
                 cout << texts.invalidMove;
                 Pause();
             }
-        }
-
-        else if (u == 'q')
-        {
-            cout << "Quitting...\n";
-        }
-        else
-        {
-            cout << texts.invalidMove;
-            Pause();
-        }
+        } while (!validInput);
     }
 
     int GetRandomInt(int min, int max)
