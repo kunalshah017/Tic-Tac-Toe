@@ -38,6 +38,7 @@ public:
     const string win = "You Win!\n";                  // win message
     const string lose = "You Lose!\n";                // lose message
     const string tie = "\n\n----- Tie Game! -----\n"; // tie message
+    const string quitting = "Quitting...\n";
     const string thanks = "Thanks for playing!\n";
 };
 
@@ -68,7 +69,7 @@ public:
             randomPos = 1;
             break;
         case 'q':
-            cout << "Quitting...\n";
+            cout << texts.quitting;
             exit(0);
             break;
             
@@ -126,7 +127,7 @@ public:
 
             else if (u == 'q')
             {
-                cout << "Quitting...\n";
+                cout << texts.quitting;
                 validInput = true;
             }
             else
