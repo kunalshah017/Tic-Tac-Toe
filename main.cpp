@@ -6,6 +6,7 @@
 #include <cstring>
 #include <ctime>
 #include <random>
+#include "findMove.cpp"
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
@@ -29,13 +30,16 @@ void Pause()
 class Texts
 {
 public:
-    string horizontalLine = "---+---+---\n";   // horizontal line in the board
-    string invalidMove = "\n\nInvalid Move\n"; // invalid move
-    string instruction = "\n\nEnter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
-    string win = "\n\nYou Win!\n";              // win message
-    string lose = "\n\nYou Lose!\n";            // lose message
-    string tie = "\n\n----- Tie Game! -----\n"; // tie message
-    string thanks = "\n\nThanks for playing!\n";
+    const string horizontalLine = "---+---+---\n";    // horizontal line in the board
+    const string invalidMove = "Invalid Move\n";      // invalid move
+    const string invalidInput = "Invalid Input\n";    // invalid input
+    const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
+    const string difficultyMenu = "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard\n";
+    const string win = "You Win!\n";                  // win message
+    const string lose = "You Lose!\n";                // lose message
+    const string tie = "\n\n----- Tie Game! -----\n"; // tie message
+    const string quitting = "Quitting...\n";
+    const string thanks = "Thanks for playing!\n";
 };
 
 class Game
@@ -44,8 +48,37 @@ public:
     char chars[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}; // chars[0] is not used
     char u;
     int comp;
+    float randomPos;    // for random move
     bool win = false;
     Texts texts;
+
+    void ShowDifficultyMenu()
+    {
+        char difficulty;
+        cout << texts.difficultyMenu;
+        cin >> difficulty;
+        switch (difficulty)
+        {
+        case '1':
+            randomPos = 7;
+            break;
+        case '2':
+            randomPos = 4;
+            break;
+        case '3':
+            randomPos = 1;
+            break;
+        case 'q':
+            cout << texts.quitting;
+            exit(0);
+            break;
+            
+        default:
+            cout << texts.invalidInput;
+            ShowDifficultyMenu();
+            break;
+        }
+    }
 
     void PrintBoard()
     {
@@ -70,61 +103,63 @@ public:
     void getUserMove()
     {
         cout << texts.instruction;
-        cout << ">>";
-        cin >> u;
-        cin.ignore();
-
-        if (u >= '1' && u <= '9')
+        bool validInput = false;
+        do
         {
-            int i = u - '0'; // char -> int  e.g. '5' - '0' = 5
-            if (chars[i] == u)
+            cout << ">>";
+            cin >> u;
+            cin.ignore();
+
+            if (u >= '1' && u <= '9')
             {
-                chars[i] = 'X';
+                int i = u - '0'; // char -> int  e.g. '5' - '0' = 5
+                if (chars[i] == u)
+                {
+                    chars[i] = 'X';
+                    validInput = true;
+                }
+                else
+                {
+                    cout << texts.invalidMove;
+                    Pause();
+                }
+            }
+
+            else if (u == 'q')
+            {
+                cout << texts.quitting;
+                validInput = true;
             }
             else
             {
                 cout << texts.invalidMove;
                 Pause();
             }
-        }
-
-        else if (u == 'q')
-        {
-            cout << "Quitting...\n";
-        }
-        else
-        {
-            cout << texts.invalidMove;
-            Pause();
-        }
+        } while (!validInput);
     }
 
-    void ChooseRandom()
+    int GetRandomInt(int min, int max)
     {
         static std::random_device rd;
         static std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> distribution(1, 9);
-        comp = distribution(gen);
+        std::uniform_int_distribution<int> distribution(min, max);
+        return distribution(gen);
     }
 
     void ComputerMove()
-    {
-        ChooseRandom();
-        if (comp >= 1 && comp <= 9)
-        {
-            if (chars[comp] == '0' + comp) // int -> char  e.g. '0' + 5 = '5'
+    {   
+        int randomNum = GetRandomInt(1, 10);
+        do {
+            if (randomNum <= randomPos) 
             {
-                chars[comp] = 'O';
+                comp = GetRandomInt(1, 9);
             }
             else
             {
-                ComputerMove();
+                comp = findBestMove(chars);
             }
-        }
-        else
-        {
-            ComputerMove();
-        }
+        } while (chars[comp] != '0' + comp);    // int -> char  e.g. '0' + 5 = '5'
+        chars[comp] = 'O';
     }
 
     void WinCheck()
@@ -155,6 +190,7 @@ public:
         cout << texts.lose;
         Pause();
         win = false;
+        exit(0);
     }
 
     bool equals3(char a, char b, char c)
@@ -179,13 +215,16 @@ int main()
     Game game;
     Texts texts;
 
+    game.ShowDifficultyMenu();
+    ClearScreen();
+
     game.PrintBoard();
     do
     {
         game.getUserMove();
         for (int i = 1; i <= 9; i++)
         {
-            if (game.chars[i] == i)
+            if (game.chars[i] == '0' + i)
             {
                 break;
             }
@@ -194,6 +233,7 @@ int main()
                 ClearScreen();
                 game.PrintBoard();
                 cout << texts.tie;
+                exit(0);
                 break;
             }
         }
