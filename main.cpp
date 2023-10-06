@@ -30,16 +30,25 @@ void Pause()
 class Texts
 {
 public:
-    const string horizontalLine = "---+---+---\n";    // horizontal line in the board
-    const string invalidMove = "Invalid Move\n";      // invalid move
-    const string invalidInput = "Invalid Input\n";    // invalid input
-    const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
-    const string difficultyMenu = "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard\n";
-    const string win = "You Win!\n";                  // win message
-    const string lose = "You Lose!\n";                // lose message
-    const string tie = "\n\n----- Tie Game! -----\n"; // tie message
-    const string quitting = "Quitting...\n";
-    const string thanks = "Thanks for playing!\n";
+    const string blue = "\033[34m";
+    const string red = "\033[31m";
+    const string cyan = "\033[36m";
+    const string yellow = "\033[33m";
+    const string green = "\033[32m";
+    const string magenta = "\033[35m";
+    const string reset = "\033[0m";
+
+    // Define your text
+    const string horizontalLine = blue + "---+---+---" + reset + "\n";
+    const string invalidMove = red + "Invalid Move" + reset + "\n";
+    const string invalidInput = red + "Invalid Input" + reset + "\n";
+    const string instruction = cyan + "Enter a number from 1 to 9: \n OR \nPress 'q' to quit" + reset + "\n";
+    const string difficultyMenu = yellow + "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard" + reset + "\n";
+    const string win = green + "You Win!" + reset + "\n";
+    const string lose = red + "You Lose!" + reset + "\n";
+    const string tie = "\n\n----- " + magenta + "Tie Game!" + reset + " -----\n";
+    const string quitting = yellow + "Quitting..." + reset + "\n";
+    const string thanks = cyan + "Thanks for playing!" + reset + "\n";
 };
 
 class Game
