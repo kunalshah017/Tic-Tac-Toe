@@ -30,16 +30,25 @@ void Pause()
 class Texts
 {
 public:
-    const string horizontalLine = "---+---+---\n";    // horizontal line in the board
-    const string invalidMove = "Invalid Move\n";      // invalid move
-    const string invalidInput = "Invalid Input\n";    // invalid input
-    const string instruction = "Enter a number from 1 to 9: \n OR \nPress 'q' to quit\n";
-    const string difficultyMenu = "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard\n";
-    const string win = "You Win!\n";                  // win message
-    const string lose = "You Lose!\n";                // lose message
-    const string tie = "\n\n----- Tie Game! -----\n"; // tie message
-    const string quitting = "Quitting...\n";
-    const string thanks = "Thanks for playing!\n";
+    const string blue = "\033[34m"; // Blue
+    const string red = "\033[31m"; // Red
+    const string cyan = "\033[36m"; // Cyan
+    const string yellow = "\033[33m"; // Yellow
+    const string green = "\033[32m"; // Green
+    const string magenta = "\033[35m"; // Magenta
+    const string reset = "\033[0m"; // White
+
+    // Define your text
+    const string horizontalLine = blue + "---+---+---" + reset + "\n"; // Horizontal Line (Decorator)
+    const string invalidMove = red + "Invalid Move" + reset + "\n"; // Invalid Move (Message)
+    const string invalidInput = red + "Invalid Input" + reset + "\n"; // Invalid Input (Message)
+    const string instruction = cyan + "Enter a number from 1 to 9: \n OR \nPress 'q' to quit" + reset + "\n"; // Select a spot (Gameplay)
+    const string difficultyMenu = yellow + "Choose difficulty:\n1. Easy\n2. Medium\n3. Hard" + reset + "\n"; // Choose a difficulty (Gameplay)
+    const string win = green + "You Win!" + reset + "\n"; // Win Message (Message)
+    const string lose = red + "You Lose!" + reset + "\n"; // Lose Message (Message)
+    const string tie = "\n\n----- " + magenta + "Tie Game!" + reset + " -----\n"; // Tie Message (Message)
+    const string quitting = yellow + "Quitting..." + reset + "\n"; // Quit Message (Message)
+    const string thanks = cyan + "Thanks for playing!" + reset + "\n"; // Thanks for Playing (Message)
 };
 
 class Game
